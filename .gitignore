@@ -1,0 +1,5 @@
+PluginDevelopment/bin/
+PluginDevelopment/dist/
+*.mdzip.bak
+*.mdzip.lck
+.metadata/
