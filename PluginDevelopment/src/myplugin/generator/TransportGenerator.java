@@ -1,6 +1,5 @@
 package myplugin.generator;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
