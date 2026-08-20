@@ -1,5 +1,6 @@
-<project name="MyPlugin" default="deploy">
+<project name="MyPlugin" default="rebuild">
 	
+	<property file="build.local.properties"/>
 	<property file="build.properties"/>
 	
 	<path id="mylibs">
@@ -16,19 +17,28 @@
 	</path>
 	
 	<target name="clean">
-		<delete dir="bin"/>
+		<delete dir="build"/>
+		<delete dir="dist"/>
 	</target>
-	
+
 	<target name="compile">
-		<mkdir dir="bin"/>
-		<javac target="1.7" source="1.7" debug="yes" destdir="bin" srcdir="src" classpathref="all-libs"/>
+		<mkdir dir="build/classes"/>
+		<javac srcdir="src"
+		       destdir="build/classes"
+		       source="1.7"
+		       target="1.7"
+		       debug="yes"
+		       includeantruntime="false"
+		       fork="true"
+		       executable="${JDK8_JAVAC}"
+		       classpathref="all-libs">
+			<compilerarg line="-Xlint:-options"/>
+		</javac>
 	</target>
-	
+
 	<target name="build" depends="compile">
 		<mkdir dir="dist"/>
-		<jar destfile="dist/myplugin.jar" basedir="bin">
-			<zipfileset dir="bin" includes="**"/>
-		</jar>
+		<jar destfile="dist/myplugin.jar" basedir="build/classes"/>
 	</target>
 		
 	<target name="deploy" depends="build">
@@ -43,4 +53,7 @@
 			<fileset dir="resources/templates" includes="*.ftl"/>
 		</copy>
 	</target>
+	
+	<target name="rebuild" depends="clean,deploy"
+	        description="CLean build and deploy in MagicDraw"/>
 </project>

@@ -1,0 +1,13 @@
+PluginDevelopment/bin/
+PluginDevelopment/dist/
+PluginDevelopment/build/
+*.mdzip.bak
+*.mdzip.lck
+.metadata/
+*.class
+.idea/
+*.iml
+.vscode/
+Thumbs.db
+desktop.ini
+build.local.properties

@@ -2,8 +2,6 @@ package myplugin;
 
 import java.io.File;
 
-import javax.swing.JOptionPane;
-
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
 
@@ -15,8 +13,6 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
     String pluginDir = null; 
 
     public void init() {
-        JOptionPane.showMessageDialog(null, "My Plugin init");
-
         pluginDir = getDescriptor().getPluginDirectory().getPath();
 
         ActionsConfiguratorsManager manager =

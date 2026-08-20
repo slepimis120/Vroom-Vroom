@@ -24,10 +24,13 @@ public class TestMagicDrawLoader extends CommandLine {
 
         try {
 
-            String projectPath =
-                    "D:\\Fakultet\\S9_10_Master\\Metodologija brzog razvoja softvera\\TransportFenerator\\TransportFenerator.mdzip";
+            File file = new File("../TransportGenerator/TransportGenerator.mdzip")
+                    .getCanonicalFile();
 
-            File file = new File(projectPath);
+            if (!file.exists()) {
+                System.out.println("Model not found: " + file);
+                return 1;
+            }
 
             ProjectDescriptor descriptor =
                     ProjectDescriptorsFactory.createProjectDescriptor(
