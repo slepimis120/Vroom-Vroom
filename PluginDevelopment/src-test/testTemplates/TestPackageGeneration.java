@@ -401,7 +401,7 @@ public class TestPackageGeneration {
 
         generator.generate();
 
-        exportModelToXml();
+        //exportModelToXml();
     }
 
 
