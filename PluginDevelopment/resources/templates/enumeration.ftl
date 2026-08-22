@@ -6,4 +6,7 @@ public enum ${enumeration.name} {
     ${enumeration.getValueAt(i)}<#if i < enumeration.valuesCount-1>,</#if>
 </#list>
 
+    // <protected region name="custom">
+
+    // </protected region>
 }

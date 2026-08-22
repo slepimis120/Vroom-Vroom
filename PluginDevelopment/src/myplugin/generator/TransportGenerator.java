@@ -5,6 +5,8 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.StringWriter;
+import java.io.File;
 
 import javax.swing.JOptionPane;
 
@@ -51,7 +53,7 @@ public class TransportGenerator extends BasicGenerator {
         }
     }
 
-    private void generateEntity(FMClass cl) {
+    /*private void generateEntity(FMClass cl) {
 
         try {
             Writer out = getWriter(cl.getName(), cl.getTypePackage());
@@ -75,157 +77,251 @@ public class TransportGenerator extends BasicGenerator {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }*/
+    
+    private void generateEntity(FMClass cl) {
+
+        try {
+
+            Map<String, Object> context =
+                    new HashMap<String, Object>();
+
+            context.put("class", cl);
+            context.put("properties", cl.getProperties());
+            context.put("importedPackages", cl.getImportedPackages());
+
+            StringWriter generatedWriter =
+                    new StringWriter();
+
+            getTemplate().process(
+                    context,
+                    generatedWriter
+            );
+
+            writeGeneratedFile(
+                    cl.getName(),
+                    cl.getTypePackage(),
+                    generatedWriter.toString()
+            );
+
+        } catch (TemplateException e) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
+
+        } catch (IOException e) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
+        }
     }
 
     private void generateRepository(FMClass cl) {
 
         try {
+
             Configuration cfg = getCfg();
 
             Template repositoryTemplate =
                     cfg.getTemplate("repository.ftl");
 
-            String oldOutputFileName = getOutputFileName();
+            Map<String, Object> context =
+                    new HashMap<String, Object>();
+
+            context.put("class", cl);
+
+            StringWriter generatedWriter =
+                    new StringWriter();
+
+            repositoryTemplate.process(
+                    context,
+                    generatedWriter
+            );
+
+            String oldOutputFileName =
+                    getOutputFileName();
 
             setOutputFileName("{0}Repository.java");
 
-            Writer out = getWriter(
+            writeGeneratedFile(
                     cl.getName(),
-                    cl.getTypePackage()
+                    cl.getTypePackage(),
+                    generatedWriter.toString()
             );
 
             setOutputFileName(oldOutputFileName);
 
-            if (out == null) {
-                return;
-            }
-
-            Map<String, Object> context = new HashMap<String, Object>();
-            context.put("class", cl);
-
-            repositoryTemplate.process(context, out);
-
-            out.flush();
-            out.close();
-
         } catch (TemplateException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
+
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
         }
     }
     
     private void generateService(FMClass cl) {
 
         try {
+
             Configuration cfg = getCfg();
 
             Template serviceTemplate =
                     cfg.getTemplate("service.ftl");
 
-            String oldOutputFileName = getOutputFileName();
+            Map<String, Object> context =
+                    new HashMap<String, Object>();
+
+            context.put("class", cl);
+
+            StringWriter generatedWriter =
+                    new StringWriter();
+
+            serviceTemplate.process(
+                    context,
+                    generatedWriter
+            );
+
+            String oldOutputFileName =
+                    getOutputFileName();
 
             setOutputFileName("{0}Service.java");
 
-            Writer out = getWriter(
+            writeGeneratedFile(
                     cl.getName(),
-                    cl.getTypePackage()
+                    cl.getTypePackage(),
+                    generatedWriter.toString()
             );
 
             setOutputFileName(oldOutputFileName);
 
-            if (out == null) {
-                return;
-            }
-
-            Map<String, Object> context = new HashMap<String, Object>();
-            context.put("class", cl);
-
-            serviceTemplate.process(context, out);
-
-            out.flush();
-            out.close();
-
         } catch (TemplateException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
+
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
         }
     }
     
     private void generateController(FMClass cl) {
 
         try {
+
             Configuration cfg = getCfg();
 
             Template controllerTemplate =
                     cfg.getTemplate("controller.ftl");
 
-            String oldOutputFileName = getOutputFileName();
+            Map<String, Object> context =
+                    new HashMap<String, Object>();
+
+            context.put("class", cl);
+
+            StringWriter generatedWriter =
+                    new StringWriter();
+
+            controllerTemplate.process(
+                    context,
+                    generatedWriter
+            );
+
+            String oldOutputFileName =
+                    getOutputFileName();
 
             setOutputFileName("{0}Controller.java");
 
-            Writer out = getWriter(
+            writeGeneratedFile(
                     cl.getName(),
-                    cl.getTypePackage()
+                    cl.getTypePackage(),
+                    generatedWriter.toString()
             );
 
             setOutputFileName(oldOutputFileName);
 
-            if (out == null) {
-                return;
-            }
-
-            Map<String, Object> context = new HashMap<String, Object>();
-            context.put("class", cl);
-
-            controllerTemplate.process(context, out);
-
-            out.flush();
-            out.close();
-
         } catch (TemplateException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
+
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
         }
     }
     
     private void generateEnumeration(FMEnumeration en) {
 
         try {
+
             Configuration cfg = getCfg();
 
             Template enumerationTemplate =
                     cfg.getTemplate("enumeration.ftl");
 
-            String oldOutputFileName = getOutputFileName();
+            String oldOutputFileName =
+                    getOutputFileName();
 
             setOutputFileName("{0}.java");
 
-            Writer out = getWriter(
+            Map<String, Object> context =
+                    new HashMap<String, Object>();
+
+            context.put("enumeration", en);
+
+            StringWriter generatedWriter =
+                    new StringWriter();
+
+            enumerationTemplate.process(
+                    context,
+                    generatedWriter
+            );
+
+            writeGeneratedFile(
                     en.getName(),
-                    en.getTypePackage()
+                    en.getTypePackage(),
+                    generatedWriter.toString()
             );
 
             setOutputFileName(oldOutputFileName);
 
-            if (out == null) {
-                return;
-            }
-
-            Map<String, Object> context = new HashMap<String, Object>();
-            context.put("enumeration", en);
-
-            enumerationTemplate.process(context, out);
-
-            out.flush();
-            out.close();
-
         } catch (TemplateException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
+
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage()
+            );
         }
     }
+    
 }
