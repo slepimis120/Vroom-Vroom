@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.io.FileWriter;
 
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapperBuilder;
@@ -172,6 +173,51 @@ public abstract class BasicGenerator {
 
 	public void setFilePackage(String filePackage) {
 		this.filePackage = filePackage;
+	}
+	
+	protected File getOutputFile(String fileNamePart, String packageName) {
+
+	    if (!packageName.equals(filePackage)) {
+	        filePackage = packageName;
+	    }
+
+	    String fullPath = outputPath
+	            + File.separator
+	            + (filePackage.isEmpty()
+	                    ? ""
+	                    : packageToPath(filePackage) + File.separator)
+	            + outputFileName.replace("{0}", fileNamePart);
+
+	    return new File(fullPath);
+	}
+	
+	protected void writeGeneratedFile(
+	        String fileNamePart,
+	        String packageName,
+	        String generatedContent) throws IOException {
+
+	    File outputFile =
+	            getOutputFile(fileNamePart, packageName);
+
+	    String finalContent =
+	            ProtectedRegionHelper.preserveProtectedRegion(
+	                    outputFile,
+	                    generatedContent
+	            );
+
+	    Writer out =
+	            getWriter(
+	                    fileNamePart,
+	                    packageName
+	            );
+
+	    if (out == null) {
+	        return;
+	    }
+
+	    out.write(finalContent);
+	    out.flush();
+	    out.close();
 	}
 
 }

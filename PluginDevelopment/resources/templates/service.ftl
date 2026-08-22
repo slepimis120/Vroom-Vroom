@@ -29,4 +29,8 @@ public class ${class.name}Service {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+    
+	// <protected region name="custom">
+
+    // </protected region>
 }

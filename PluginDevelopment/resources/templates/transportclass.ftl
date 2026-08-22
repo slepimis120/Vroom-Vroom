@@ -69,4 +69,8 @@ public class ${class.name} {
 
 </#list>
 
+    // <protected region name="custom">
+
+    // </protected region>
+
 }
