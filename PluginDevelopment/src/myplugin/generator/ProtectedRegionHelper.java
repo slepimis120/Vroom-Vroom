@@ -2,8 +2,9 @@ package myplugin.generator;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class ProtectedRegionHelper {
 
@@ -57,7 +58,7 @@ public class ProtectedRegionHelper {
         StringBuilder content = new StringBuilder();
 
         BufferedReader reader =
-                new BufferedReader(new FileReader(file));
+                new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
         String line;
 
