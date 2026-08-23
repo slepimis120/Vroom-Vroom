@@ -3,7 +3,7 @@ package ${enumeration.typePackage};
 public enum ${enumeration.name} {
 
 <#list 0..enumeration.valuesCount-1 as i>
-    ${enumeration.getValueAt(i)}<#if i < enumeration.valuesCount-1>,</#if>
+    ${enumeration.getValueAt(i)}<#if i < enumeration.valuesCount-1>,<#else>;</#if>
 </#list>
 
     // <protected region name="custom">

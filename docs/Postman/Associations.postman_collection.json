@@ -1,0 +1,153 @@
+{
+  "info": {
+    "_postman_id": "513732c9-c0b2-475a-a39e-a30c3b90bd15",
+    "name": "Associations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29309425",
+    "_collection_link": "https://go.postman.co/collection/29309425-513732c9-c0b2-475a-a39e-a30c3b90bd15?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "CREATE TRANSPORT STOP",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"sequence\": 1,\r\n    \"transport\": {\r\n        \"id\": 1\r\n    },\r\n    \"station\": {\r\n        \"id\": 1\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/transportStop",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transportStop"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE 2ND TRANSPORT STOP",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"sequence\": 2,\r\n    \"transport\": {\r\n        \"id\": 1\r\n    },\r\n    \"station\": {\r\n        \"id\": 2\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/transportStop",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transportStop"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE SCHEDULE",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"departure\": \"2026-09-01T08:30:00.000+0000\",\r\n    \"arrival\": \"2026-09-01T10:15:00.000+0000\",\r\n    \"transport\": {\r\n        \"id\": 1\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/schedule",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "schedule"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET TRANSPORT WITH ASSOCIATIONS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/transport/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET ALL TRANSPORT STOPS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/transportStop",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transportStop"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET ALL SCHEDULES",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/schedule",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "schedule"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
