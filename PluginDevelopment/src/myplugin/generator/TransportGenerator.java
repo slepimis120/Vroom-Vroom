@@ -1,12 +1,10 @@
 package myplugin.generator;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.io.StringWriter;
-import java.io.File;
 
 import javax.swing.JOptionPane;
 
@@ -52,32 +50,6 @@ public class TransportGenerator extends BasicGenerator {
         	}
         }
     }
-
-    /*private void generateEntity(FMClass cl) {
-
-        try {
-            Writer out = getWriter(cl.getName(), cl.getTypePackage());
-
-            if (out == null) {
-                return;
-            }
-
-            Map<String, Object> context = new HashMap<String, Object>();
-            context.put("class", cl);
-            context.put("properties", cl.getProperties());
-            context.put("importedPackages", cl.getImportedPackages());
-
-            getTemplate().process(context, out);
-
-            out.flush();
-            out.close();
-
-        } catch (TemplateException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }*/
     
     private void generateEntity(FMClass cl) {
 
