@@ -52,6 +52,7 @@
 		<copy todir="${MAGICDRAW_HOME}/plugins/myplugin/templates">
 			<fileset dir="resources/templates" includes="*.ftl"/>
 		</copy>
+		<echo file="${MAGICDRAW_HOME}/plugins/myplugin/generator.properties">OUTPUT_PATH=${OUTPUT_PATH}</echo>
 	</target>
 	
 	<target name="rebuild" depends="clean,deploy"

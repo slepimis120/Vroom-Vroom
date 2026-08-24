@@ -2,6 +2,8 @@ package myplugin.analyzer;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import myplugin.generator.fmmodel.FMClass;
 import myplugin.generator.fmmodel.FMEnumeration;
@@ -18,6 +20,7 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Enumeration;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type;
+import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 
 /**
@@ -59,7 +62,7 @@ public class ModelAnalyzer {
         String packageName = packageOwner;
 
         if (pack != root) {
-            packageName += "." + pack.getName();
+            packageName += "." + pack.getName().toLowerCase();
         }
 
         if (pack.hasOwnedElement()) {
@@ -250,6 +253,10 @@ public class ModelAnalyzer {
                     + attName
                     + " must have name!");
         }
+        
+        if (TYPE_MAP.containsKey(typeName)) {
+            typeName = TYPE_MAP.get(typeName);
+        }
 
         int lower = p.getLower();
         int upper = p.getUpper();
@@ -262,6 +269,34 @@ public class ModelAnalyzer {
                         lower,
                         upper
                 );
+        
+        prop.setId(
+                StereotypesHelper.getAppliedStereotypeByString(p, "ID") != null);
+
+        Stereotype attrSt =
+                StereotypesHelper.getAppliedStereotypeByString(p, "Attribute");
+
+        if (attrSt != null) {
+
+            Object columnName = tag(p, attrSt, "columnName");
+            Object label      = tag(p, attrSt, "label");
+            Object required   = tag(p, attrSt, "required");
+            Object unique     = tag(p, attrSt, "unique");
+            Object length     = tag(p, attrSt, "length");
+            Object fetch      = tag(p, attrSt, "fetch");
+
+            if (columnName != null) prop.setColumnName(columnName.toString());
+            if (label      != null) prop.setLabel(label.toString());
+            if (required   != null) prop.setRequired(Boolean.parseBoolean(required.toString()));
+            if (unique     != null) prop.setUnique(Boolean.parseBoolean(unique.toString()));
+            if (length     != null) prop.setLength(Integer.valueOf(length.toString()));
+
+            if (fetch != null) {
+                prop.setFetch(fetch instanceof EnumerationLiteral
+                        ? ((EnumerationLiteral) fetch).getName()
+                        : fetch.toString());
+            }
+        }
 
         prop.setAssociation(association);
 
@@ -333,5 +368,26 @@ public class ModelAnalyzer {
         }
 
         return fmEnum;
+    }
+    
+    private static Object tag(Element el, Stereotype st, String tagName) {
+        List<?> values =
+                StereotypesHelper.getStereotypePropertyValue(el, st, tagName);
+        return (values == null || values.isEmpty()) ? null : values.get(0);
+    }
+    
+    private static final Map<String, String> TYPE_MAP =
+            new HashMap<String, String>();
+
+    static {
+        TYPE_MAP.put("date", "Date");
+        TYPE_MAP.put("dateTime", "Date");
+        TYPE_MAP.put("time", "Date");
+        TYPE_MAP.put("int", "Integer");
+        TYPE_MAP.put("long", "Long");
+        TYPE_MAP.put("float", "Double");
+        TYPE_MAP.put("double", "Double");
+        TYPE_MAP.put("Real", "Double");
+        TYPE_MAP.put("UnlimitedNatural", "Integer");
     }
 }

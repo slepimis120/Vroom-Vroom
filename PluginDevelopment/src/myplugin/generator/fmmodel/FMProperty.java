@@ -5,15 +5,20 @@ public class FMProperty extends FMElement {
     private String type;
     private String visibility;
 
-    // Kardinalitet ove strane veze
     private Integer lower;
     private Integer upper;
 
-    // Da li je property deo asocijacije
     private boolean association;
 
-    // Gornja granica suprotne strane asocijacije
     private Integer oppositeUpper;
+
+    private boolean id;
+    private String columnName;
+    private String label;
+    private boolean required;
+    private boolean unique;
+    private Integer length;
+    private String fetch;
 
     public FMProperty(
             String name,
@@ -30,10 +35,17 @@ public class FMProperty extends FMElement {
         this.upper = upper;
         this.association = false;
         this.oppositeUpper = 1;
+        this.id = false;
+        this.required = false;
+        this.unique = false;
+        this.length = 255;
+        this.fetch = "LAZY";
     }
 
     public FMProperty() {
         super();
+        this.length = 255;
+        this.fetch = "LAZY";
     }
 
     public String getType() {
@@ -82,5 +94,61 @@ public class FMProperty extends FMElement {
 
     public void setOppositeUpper(Integer oppositeUpper) {
         this.oppositeUpper = oppositeUpper;
+    }
+
+    public boolean isId() {
+        return id;
+    }
+
+    public void setId(boolean id) {
+        this.id = id;
+    }
+
+    public String getColumnName() {
+        return columnName;
+    }
+
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
+
+    public boolean isUnique() {
+        return unique;
+    }
+
+    public void setUnique(boolean unique) {
+        this.unique = unique;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public String getFetch() {
+        return fetch;
+    }
+
+    public void setFetch(String fetch) {
+        this.fetch = fetch;
     }
 }

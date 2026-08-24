@@ -1,6 +1,9 @@
 package myplugin;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
@@ -38,12 +41,30 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
         ejbOptions.setTemplateDir(
                 pluginDir + File.separator + ejbOptions.getTemplateDir()
         );
+        
+        String outputPath = "c:/temp";
+
+        File configFile = new File(pluginDir, "generator.properties");
+
+        if (configFile.exists()) {
+            try {
+                Properties props = new Properties();
+                FileInputStream in = new FileInputStream(configFile);
+                props.load(in);
+                in.close();
+                outputPath = props.getProperty("OUTPUT_PATH", outputPath);
+            } catch (IOException e) {
+                System.err.println(
+                        "Not able to read generator.properties: "
+                        + e.getMessage());
+            }
+        }
 
 
         // OUR TRANSPORT GENERATOR
 
         GeneratorOptions transportOptions = new GeneratorOptions(
-                "c:/temp",
+                outputPath,
                 "transportclass",
                 "templates",
                 "{0}.java",

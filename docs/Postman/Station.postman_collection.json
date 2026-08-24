@@ -1,0 +1,86 @@
+{
+  "info": {
+    "_postman_id": "17da9b6e-475f-4c15-8636-25f577100bef",
+    "name": "Station",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29309425",
+    "_collection_link": "https://go.postman.co/collection/29309425-17da9b6e-475f-4c15-8636-25f577100bef?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET STATIONS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/station",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "station"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE STATION",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Novi Sad\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/station",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "station"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE 2ND STATION",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Beograd\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/station",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "station"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

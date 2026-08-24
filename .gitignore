@@ -1,6 +1,7 @@
 PluginDevelopment/bin/
 PluginDevelopment/dist/
 PluginDevelopment/build/
+TransportBackend/target/
 *.mdzip.bak
 *.mdzip.lck
 .metadata/

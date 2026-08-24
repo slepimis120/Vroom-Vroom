@@ -66,7 +66,7 @@ public abstract class BasicGenerator {
 							"An error occurred during folder creation " + outputPath);
 			}
 		} catch (IOException e) {
-			throw new IOException("Can't find template " + tName + ".", e);
+			throw new IOException("Template error in " + tName + ": " + e.getMessage(), e);
 		}
 
 	}

@@ -1,0 +1,205 @@
+{
+  "info": {
+    "_postman_id": "0873d660-47da-41df-bf51-a66635829150",
+    "name": "Transport",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29309425",
+    "_collection_link": "https://go.postman.co/collection/29309425-0873d660-47da-41df-bf51-a66635829150?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "CREATE TRANSPORT",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Novi Sad - Beograd\",\r\n    \"origin\": \"Novi Sad\",\r\n    \"destination\": \"Beograd\",\r\n    \"type\": \"BUS\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/transport",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE WITHOUT NAME",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"origin\": \"Novi Sad\",\r\n    \"destination\": \"Beograd\",\r\n    \"type\": \"BUS\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/transport",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE LONG NAME",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum\",\r\n    \"origin\": \"Novi Sad\",\r\n    \"destination\": \"Beograd\",\r\n    \"type\": \"BUS\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/transport",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE TRANSPORT INVALID TYPE",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Test\",\r\n  \"origin\": \"A\",\r\n  \"destination\": \"B\",\r\n  \"type\": \"HELIKOPTER\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/transport",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET ALL",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/transport",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET BY ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/transport/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET FALSE TRANSPORT",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/transport/99",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport",
+            "99"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE TRANSPORT",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/transport/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "transport",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
