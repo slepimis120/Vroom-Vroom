@@ -43,7 +43,7 @@ public class ${class.name} {
     @OneToOne(fetch = FetchType.${property.fetch})
     private ${property.type} ${property.name};
 </#if>
-<#elseif property.id>
+<#elseif property.id!false>
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ${property.name};
@@ -66,11 +66,11 @@ public class ${class.name} {
         this.${property.name} = ${property.name};
     }
 <#else>
-    public <#if property.id>Long<#else>${property.type}</#if> get${property.name?cap_first}() {
+    public <#if property.id!false>Long<#else>${property.type}</#if> get${property.name?cap_first}() {
         return ${property.name};
     }
 
-    public void set${property.name?cap_first}(<#if property.id>Long<#else>${property.type}</#if> ${property.name}) {
+    public void set${property.name?cap_first}(<#if property.id!false>Long<#else>${property.type}</#if> ${property.name}) {
         this.${property.name} = ${property.name};
     }
 </#if>
